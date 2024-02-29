@@ -1,13 +1,13 @@
 import random
 
 class rps_game:
-    def __init__(self):
+    def __init__(self): # 변수선언
         self.win_count = 0
         self.draw_count = 0
         self.lose_count = 0
     
     def user_input(self):
-        while True:
+        while True: # 입력받는 부분
             user_rps = input("가위(s), 바위(r), 보(p) 중 하나를 입력하세요 : ")
             if user_rps in ['가위', '바위', '보', 's', 'r', 'p']:
                 if user_rps == 's':
@@ -20,7 +20,7 @@ class rps_game:
             else:
                 print('잘못된 입력입니다')
     
-    def rps_result(self):
+    def rps_result(self): #컴퓨터와 비교하는 부분
         rps = random.choice(['가위', '바위', '보'])
         if self.user_rps == rps:
             print(f'사용자:{self.user_rps}, 컴퓨터: {rps} 무승부입니다.')
@@ -46,7 +46,7 @@ class rps_game:
             else:
                 print('다시 입력해주세요')
 
-    def rps_play(self):
+    def rps_play(self): #실행하는 부분
         print('가위바위보 게임을 시작합니다.')
         self.user_input()
         self.rps_result()
@@ -54,8 +54,3 @@ class rps_game:
 
 game = rps_game()
 game.rps_play()
-
-# 변수선언
-# 유저에게 입력받고 <- 제대로 된 값을 줄 때까지 '이거 아닌데?'
-# 랜덤으로 만든거랑 입력을 비교해서 결과를 말해준다
-# 게임을 계속할지 물어보고 종료시 전적을 알려준다

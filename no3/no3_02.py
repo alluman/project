@@ -59,7 +59,7 @@ class Post:
                 return
         print('해당하는 글이 없습니다.')
 
-def main():
+def main(): #메인 페이지
     while True:
         user_choice = input('용건을 입력해주세요. (login, member, post, search / 종료: end): ')
         if user_choice == 'login':
@@ -76,7 +76,7 @@ def main():
         else:
             print('잘못된 입력입니다.')
 
-def user_login():
+def user_login(): #로그인 여부를 확인하고, 필요하면 아이디와 비밀번호를 입력받고 대조하고 / 로그인상태라면 로그아웃 여부를 물어봄
     if Member.check_login:
         log_check = input("이미 로그인 중입니다. 로그아웃 하시겠습니까? (y/n)")
         if log_check.lower() == 'y':
@@ -99,8 +99,8 @@ def user_login():
             return
     print('아이디를 찾을 수 없습니다. 처음으로 돌아갑니다.')
 
-def manage_members():
-    while True: # return으로 변경해서 모양을 만들수는 없을까
+def manage_members():  # main관련 조작부
+    while True: 
         choice_member = input('member를 선택하셨습니다. 생성, 탈퇴, 뒤로 중 선택하세요: ') 
         if choice_member == '생성':
             create_member()
@@ -113,7 +113,7 @@ def manage_members():
         else:
             print('잘못된 입력입니다.')
 
-def create_member():
+def create_member(): # 멤버 추가
     while True:
         input_name = input('이름을 입력하세요: ')
         if Member.check_name(input_name):
@@ -135,7 +135,7 @@ def create_member():
     Member.add_member(new_member)
     print('멤버가 추가되었습니다.')
 
-def remove_member():
+def remove_member(): #멤버 삭제
     if Member.check_login:
         check_user_out = input('정말로 탈퇴하시겠습니까? (y/n): ')
         if check_user_out.lower() == 'y':
@@ -151,7 +151,7 @@ def remove_member():
     else:
         print('로그인이 필요합니다.')
 
-def manage_posts():
+def manage_posts(): #post관련 조작부
     while True:
         choice_post = input('post를 선택하셨습니다. 생성, 삭제, 뒤로 중 선택하세요: ')
         if choice_post == '생성':
@@ -165,7 +165,7 @@ def manage_posts():
         else:
             print('잘못된 입력입니다.')
 
-def create_post(): #이거 입력하다가 도중에 종료하는 느낌을 만들고 싶은데 명령어로 하자니 해당 내용으로 글이나 내용작성이 안된다..
+def create_post(): # post 추가 // 로그인 확인 및 작성시 로그인중인 username이 author로 등록됨
     if Member.check_login:
         new_title = input('제목을 입력하세요: ')
         new_content = input('내용을 입력하세요: ')
@@ -174,7 +174,7 @@ def create_post(): #이거 입력하다가 도중에 종료하는 느낌을 만�
     else:
         print('로그인이 필요합니다.')
 
-def delete_post():
+def delete_post(): # post 삭제 // 로그인 확인 및 작성자와 대조하고 같아야 삭제 가능
     if Member.check_login:
         user_posts = [post.title for post in Post.posts if post.author == Member.check_login]
         if not user_posts:
@@ -187,7 +187,7 @@ def delete_post():
     else:
         print('로그인이 필요합니다.')
 
-def search_posts():
+def search_posts(): #검색관련 조작부
     while True:
         search_posts = input('search를 선택하셨습니다. 제목, 내용, 작성자, 뒤로중 선택하세요: ')
         if search_posts == '제목':
@@ -204,19 +204,19 @@ def search_posts():
         else:
             print('잘못된 입력입니다.')
 
-def search_title():
+def search_title(): # 제목의 일부분 검색
     search_title = input('검색할 제목을 입력해주세요: ')
     for post in Post.posts:
         if search_title in post.title:
             print(post.title)
 
-def search_content():
+def search_content(): # 내용의 일부분 검색
     search_content = input('검색할 내용을 입력해주세요: ')
     for post in Post.posts:
         if search_content in post.content:
             print(post.title)
 
-def search_author():
+def search_author(): # 작성자는 제대로 입력해야 검색 가능합니다.
     search_author = input('검색할 작성자를 입력해주세요: ')
     for post in Post.posts:
         if search_author == post.author:

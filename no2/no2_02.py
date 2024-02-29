@@ -7,7 +7,7 @@ def main():
         rps = random.choice(['가위', '바위', '보'])
         
         print('가위바위보 게임을 시작합니다.')
-        while True: # 입력을 받는 부분
+        while True: # 입력을 받는 부분 / r,p,s로도 게임이 가능하도록 변경
             user_rps = input("가위(s), 바위(r), 보(p) 중 하나를 입력하세요 : ")
             if user_rps in ['가위', '바위', '보', 's', 'r', 'p']:
                 if user_rps == 's':
