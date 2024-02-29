@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rpsgame</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .game-container {
+            text-align: center;
+        }
+        
+        h1 {
+            color: #333;
+        }
+        
+        button {
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            transform: scale(1.1);
+        }
+        
+        button:active {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        img {
+            width: 100px;
+            height: 100px;
+        }
+        
+        .record-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        
+        .record-btn:hover {
+            background-color: #45a049;
+        }
+        
+        .record-details {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>가위바위보 게임</h1>
+        <form action="/play" method="post">
+            <button type="submit" name="choice" value="가위">
+                <img src="../static/img/scissors.png" alt="가위">
+            </button>
+            <button type="submit" name="choice" value="바위">
+                <img src="../static/img/rock.png" alt="바위">
+            </button>
+            <button type="submit" name="choice" value="보">
+                <img src="../static/img/paper.png" alt="보">
+            </button>
+        </form>
+        
+        {% if result %}
+        <h2>결과: {{ result }}</h2>
+        <h3>승리: {{ win }} 무승부 {{ draw }} 패배 {{ lose }}</h3>
+        <ul class="record-details" style="display: none;">
+            {% for i in all_results %}
+            <li>사용자: {{ i.user_rps }}, 컴퓨터: {{ i.computer_rps }}, 결과: {{ i.result }}</li>
+            {% endfor %}
+        </ul>
+        <button class="record-btn" onclick="toggleRecord()">게임 기록</button>
+        <h2>승률</h2>
+        <p>현재 승률: {{ win_rate }}%</p>
+        {% endif %}
+    </div>
+    
+    <script>
+        function toggleRecord() {
+            var recordDetails = document.querySelector('.record-details');
+            recordDetails.style.display = recordDetails.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</body>
+    
+        
+</body>
+</html>

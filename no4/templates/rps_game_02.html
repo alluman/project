@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rpsgame</title>
+</head>
+<body>
+    <h1>가위바위보 게임</h1>
+    <form action="/play" method="post">
+        <button type="submit" name="choice" value="가위">
+            <img src="../static/img/scissors.png" alt="가위">
+        </button>
+        <button type="submit" name="choice" value="바위">
+            <img src="../static/img/rock.png" alt="바위">
+        </button>
+        <button type="submit" name="choice" value="보">
+            <img src="../static/img/paper.png" alt="보">
+        </button>
+    </form>
+       
+    {% if result %}
+    <h2>결과: {{ result }}</h2>
+    <h3>승리: {{ win }} 무승부 {{ draw }} 패배 {{ lose }}</h3>
+    <h2>게임 기록</h2>
+    <ul>
+        {% for i in all_results %}
+        <li>사용자: {{ i.user_rps }}, 컴퓨터: {{ i.computer_rps }}, 결과: {{ i.result }}</li>
+        {% endfor %}
+    </ul>
+    
+    <h2>승률</h2>
+    <p>현재 승률: {{ win_rate }}%</p>
+    {% endif %}
+    
+</body>
+    
+        
+</body>
+</html>

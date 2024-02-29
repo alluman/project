@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>게임 기록</h2>
+        <ul>
+            {% for i in all_results %}
+            <li>사용자: {{ i[1] }}, 컴퓨터: {{ i[2] }}, 결과: {{ i[3] }}</li>
+            {% endfor %}
+        </ul>
+</body>
+</html>
